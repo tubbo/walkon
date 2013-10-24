@@ -27,7 +27,11 @@ module Walkon
     end
 
     def entrance_music
-      @entrance_music ||= "/music/#{mac_address}.mp3"
+      @entrance_music ||= if Walkon.test?
+        "spec/fixtures/music/#{mac_address}.mp3"
+      else
+        "/music/#{mac_address}.mp3"
+      end
     end
   end
 end

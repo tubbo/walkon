@@ -18,19 +18,26 @@ module Walkon
     end
 
     def self.start
-      new.check_for_devices
+      new.run
+    end
+
+    def run
+      loop { check_for_devices }
     end
 
     def check_for_devices
-      loop do
-        HciTool.scan.each do |mac_address|
-          unless self.devices.include? mac_address
-            device = Device.new mac_address
-            device.play_entrance_music if device.has_entrance_music?
-            self.devices << Device.new(mac_address)
-          end
+      scanned_devices.each do |mac_address|
+        unless self.devices.include? mac_address
+          device = Device.new mac_address
+          device.play_entrance_music if device.has_entrance_music?
+          self.devices << Device.new(mac_address)
         end
       end
+    end
+
+    private
+    def scanned_devices
+      HciTool.scan
     end
   end
 end
