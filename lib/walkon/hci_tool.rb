@@ -23,6 +23,8 @@ module Walkon
     private
     def results
       `hcitool scan`.split "\n"
+    rescue Errno::ENOENT
+      raise "Please install hcitool/BlueZ to use this software."
     end
   end
 end

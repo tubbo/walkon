@@ -12,9 +12,9 @@ Install it yourself:
 
     $ gem install walkon
 
-Then run:
+Then, run:
 
-    $ walkon start
+    $ walkon setup
 
 ## Usage
 
