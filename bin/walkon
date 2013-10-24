@@ -3,4 +3,9 @@
 require 'bundler/setup'
 require 'walkon'
 
+unless Walkon.found_hcitool?
+  puts "Error: You need BlueZ to use this software. Exiting.."
+  exit 1
+end
+
 Walkon.start
