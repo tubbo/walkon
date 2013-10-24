@@ -1,5 +1,7 @@
 require "walkon/version"
 
 module Walkon
-  # Your code goes here...
+  def self.start
+    Walkon::Daemon.start
+  end
 end
