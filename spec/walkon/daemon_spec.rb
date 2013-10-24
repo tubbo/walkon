@@ -21,7 +21,8 @@ module Walkon
     end
 
     it "plays device's entrance music" do
-      device = subject.devices.select { |mac| mac == mac_address }.first
+      expect(subject.devices).to_not be_empty
+      device = subject.devices.select { |device| device.mac_address == mac_address }.first
       expect(device).to_not be_nil
       expect(device).to have_entrance_music
     end

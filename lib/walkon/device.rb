@@ -8,6 +8,7 @@ module Walkon
 
     def initialize with_mac_address
       @mac_address = with_mac_address
+      @entrance_music = EntranceMusic.new self
     end
 
     def has_entrance_music?

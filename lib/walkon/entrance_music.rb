@@ -16,13 +16,14 @@ module Walkon
     alias present? exists?
 
     def play
+      return true if Walkon.env == 'test'
       Playlist.cue filename
     end
 
     private
     def prefix
       if Walkon.env == 'test'
-        File.expand_path "../../../../spec/fixtures/music", __FILE__
+        File.expand_path("../../../spec/fixtures/music", __FILE__)
       else
         "/music"
       end

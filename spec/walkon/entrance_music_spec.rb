@@ -11,10 +11,6 @@ module Walkon
     end
     subject { EntranceMusic.new device }
 
-    before do
-      Playlist.stub(:cue) { true }
-    end
-
     it "finds entrance music" do
       expect(subject).to be_present
     end
