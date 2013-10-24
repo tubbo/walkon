@@ -11,11 +11,11 @@ module Walkon
     end
     subject { EntranceMusic.new device }
 
-    it "finds entrance music" do
+    it "finds an mp3 file to play" do
       expect(subject).to be_present
     end
 
-    it "enqueues file to be played via xmms" do
+    it "plays the mp3 file if found" do
       expect(subject.play).to be_true
     end
   end

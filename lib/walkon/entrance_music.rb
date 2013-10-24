@@ -1,4 +1,6 @@
-require 'walkon/playlist'
+require 'walkon/device'
+
+# Finds and plays the entrance music for a given device.
 
 module Walkon
   class EntranceMusic
@@ -16,8 +18,8 @@ module Walkon
     alias present? exists?
 
     def play
-      return true if Walkon.env == 'test'
-      Playlist.cue filename
+      return false unless exists?
+      `xmms #{entrance_music}`
     end
 
     private
