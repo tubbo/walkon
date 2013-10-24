@@ -2,6 +2,8 @@
 
 module Walkon
   class HciTool
+    attr_accessor :results
+
     def initialize
       @results = []
     end
@@ -11,9 +13,9 @@ module Walkon
     end
 
     def scan
-      results.reduce([]) do |collection, line|
-        if line =~ /(?<mac_address>..:..:..:..:..:..)/
-          collection << mac_address
+      @results = scan_results.reduce([]) do |collection, line|
+        line.scan FOR_MAC_ADDRESS do |mac_address|
+          collection << mac_address.first
         end
 
         collection
@@ -21,7 +23,8 @@ module Walkon
     end
 
     private
-    def results
+    FOR_MAC_ADDRESS = /(..:..:..:..:..:..)/
+    def scan_results
       `hcitool scan`.split "\n"
     end
   end

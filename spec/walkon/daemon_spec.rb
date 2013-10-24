@@ -4,12 +4,6 @@ require 'walkon/daemon'
 module Walkon
   describe Daemon do
     let(:mac_address) { "00:A1:5D:AB:B2:E9" }
-    let(:sample_output) do
-      %(
-        Scanning....
-           #{mac_address}  Nokia 6600
-       )
-    end
 
     before do
       subject.stub(:scanned_devices) { [mac_address] }
@@ -22,7 +16,7 @@ module Walkon
 
     it "plays device's entrance music" do
       expect(subject.devices).to_not be_empty
-      device = subject.devices.select { |device| device.mac_address == mac_address }.first
+      device = subject.devices.select { |dev| dev.mac_address == mac_address }.first
       expect(device).to_not be_nil
       expect(device).to have_entrance_music
     end
