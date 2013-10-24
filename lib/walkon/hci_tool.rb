@@ -1,35 +1,27 @@
-require 'enumerable'
-
 # A collection of device names gathered from HciTool.
 
 module Walkon
   class HciTool
-    include Enumerable
-
     def initialize
-      @addresses = []
-    end
-
-    def add mac_address
-      @addresses << mac_address
+      @results = []
     end
 
     def self.scan
-      results.reduce(self.new) do |collection, line|
+      new.scan
+    end
+
+    def scan
+      results.reduce([]) do |collection, line|
         if line =~ /(?<mac_address>..:..:..:..:..:..)/
-          collection.add mac_address
+          collection << mac_address
         end
 
         collection
       end
     end
 
-    def each
-      @addresses.each { |mac_address| yield mac_address }
-    end
-
     private
-    def self.results
+    def results
       `hcitool scan`.split "\n"
     end
   end

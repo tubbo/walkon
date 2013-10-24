@@ -1,37 +1,17 @@
-require 'enumerable'
-require 'walkon/collection'
 require 'walkon/playlist'
 
 # Represents a single Bluetooth device in the building.
 
 module Walkon
   class Device
-    include Enumerable
-
-    attr_reader :mac_address
+    attr_reader :mac_address, :entrance_music
 
     def initialize with_mac_address
       @mac_address = with_mac_address
     end
 
-    def self.all
-      Collection.from_devices
-    end
-
     def has_entrance_music?
-      File.exists? entrance_music_path
-    end
-
-    def play
-      Playlist.cue entrance_music
-    end
-
-    def entrance_music
-      @entrance_music ||= if Walkon.test?
-        "spec/fixtures/music/#{mac_address}.mp3"
-      else
-        "/music/#{mac_address}.mp3"
-      end
+      entrance_music.exists?
     end
   end
 end
