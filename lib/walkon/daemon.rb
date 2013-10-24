@@ -1,7 +1,20 @@
+require 'walkon/device'
+require 'walkon/hci_tool'
+
+# The process which listens for new Devices to come on the network, then
+# immediately plays their entrance music and adds them to the collection
+# so they won't be triggered again.
+#
+# A cron job restarts the daemon every night at 3:00am so the devices
+# collection is reset and people are triggered again once they walk in
+# the building.
+
 module Walkon
   class Daemon
+    attr_accessor :devices
+
     def initialize
-      @devices = BluetoothDevice.all
+      @devices = []
     end
 
     def self.start
@@ -10,9 +23,12 @@ module Walkon
 
     def check_for_devices
       loop do
-        BluetoothDevice.each do |device|
-          devices << device unless devices.include? device
-          sleep 5
+        HciTool.scan.each do |mac_address|
+          unless self.devices.include? mac_address
+            device = Device.new mac_address
+            device.play_entrance_music if device.has_entrance_music?
+            self.devices << Device.new(mac_address)
+          end
         end
       end
     end
