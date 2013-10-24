@@ -11,6 +11,10 @@ module Walkon
     end
     subject { EntranceMusic.new device }
 
+    before do
+      subject.stub(:play) { "" }
+    end
+
     it "finds an mp3 file to play" do
       expect(subject).to be_present
     end

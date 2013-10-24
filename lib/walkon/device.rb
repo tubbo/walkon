@@ -1,5 +1,3 @@
-require 'walkon/playlist'
-
 # Represents a single Bluetooth device in the building.
 
 module Walkon

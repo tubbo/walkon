@@ -19,7 +19,7 @@ module Walkon
 
     def play
       return false unless exists?
-      `xmms #{entrance_music}`
+      `xmms #{filename}`
     end
 
     private
