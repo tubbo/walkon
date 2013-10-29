@@ -18,7 +18,6 @@ cookbook_file "install the upstart job" do
   mode '0755'
   user 'root'
   group 'root'
-  action :create
 end
 
 service "start the walkon process" do
@@ -27,23 +26,25 @@ service "start the walkon process" do
   action :restart
 end
 
+user "create a user for everyone to access the machine" do
+  username "staff"
+  group "staff"
+  home "/home/staff"
+end
+
 directory "create a directory for music files to be dropped into" do
   path "/music"
   mode '0777'
   owner 'staff'
   group 'staff'
-  action :create
 end
 
-user "create a user for everyone to access the machine" do
-  username "staff"
-  password "undisputedcheckmate"
+directory "create a directory for staff home dir" do
+  path "/home/staff"
+  user "staff"
   group "staff"
-  home "/home/staff"
-  action :create
 end
 
-link "the music directory to staff's home" do
-  target_file "/home/staff/music"
+link "/home/staff/music" do
   to "/music"
 end
