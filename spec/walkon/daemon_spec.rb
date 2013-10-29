@@ -8,6 +8,7 @@ module Walkon
 
       before do
         subject.stub(:scanned_devices) { [mac_address] }
+        subject.stub(:play_entrance_music_for) { |device| true }
         subject.check_for_devices
       end
 

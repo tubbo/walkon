@@ -1,3 +1,5 @@
+require 'walkon/entrance_music'
+
 # Represents a single Bluetooth device in the building.
 
 module Walkon
