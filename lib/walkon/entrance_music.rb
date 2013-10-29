@@ -25,7 +25,7 @@ module Walkon
     private
     def prefix
       if Walkon.env == 'test'
-        File.expand_path("../../../spec/fixtures/music", __FILE__)
+        File.expand_path "../../../spec/fixtures/music", __FILE__
       else
         "/music"
       end
