@@ -22,6 +22,7 @@ cookbook_file "install the upstart job" do
 end
 
 service "start the walkon process" do
+  provider Chef::Provider::Service::Upstart
   service_name 'walkon'
   action :restart
 end
