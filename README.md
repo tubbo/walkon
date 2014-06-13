@@ -4,6 +4,11 @@ Walkon plays your entrance music. It's a daemon process that
 periodically checks `hcitool scan` for new Bluetooth devices, then uses
 their ESSIDs to find tracks to play as they enter the network.
 
+### Status: Alpha
+
+This is definitely not ready for prime-time use. Don't complain to me if
+it breaks.
+
 ## Installation
 
 Walkon requires the following components to have already been installed:
@@ -13,16 +18,10 @@ Walkon requires the following components to have already been installed:
 - [BlueZ][bz], the official Linux Bluetooth protocol stack
 - [XMMS][xm], a command-line audio player for Linux
 
-Install it yourself:
+Install the gem from RubyGems:
 
 ```bash
 $ gem install walkon
-```
-
-Then, run:
-
-```bash
-$ walkon setup
 ```
 
 You must also connect speakers to your machine's soundcard output in
@@ -36,6 +35,13 @@ so:
 
 ```bash
 $ scp your-track.mp3 walkon:/music/iPhone5.mp3
+```
+
+Then, run the daemon process to sniff for that ESS ID and play the track
+when it first becomes available:
+
+```bash
+$ walkon
 ```
 
 To find out more about how it works, read the [Documentation][docs].
