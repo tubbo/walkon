@@ -2,7 +2,7 @@
 
 Walkon plays your entrance music. It's a daemon process that
 periodically checks `hcitool scan` for new Bluetooth devices, then uses
-their ESSIDs to find tracks to play as they leave or exit the network.
+their ESSIDs to find tracks to play as they enter the network.
 
 ## Installation
 
