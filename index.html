@@ -34,11 +34,15 @@
           <h1>
 <a name="walkon" class="anchor" href="#walkon"><span class="octicon octicon-link"></span></a>Walkon</h1>
 
-<p>
-  Walkon plays your entrance music. It's a daemon process that
-  periodically checks <code>hcitool scan</code> for new Bluetooth devices, then uses
-  their ESSIDs to find tracks to play as they enter the network.
-</p>
+<p>Walkon plays your entrance music. It's a daemon process that
+periodically checks <code>hcitool scan</code> for new Bluetooth devices, then uses
+their ESSIDs to find tracks to play as they enter the network.</p>
+
+<h3>
+<a name="status-alpha" class="anchor" href="#status-alpha"><span class="octicon octicon-link"></span></a>Status: Alpha</h3>
+
+<p>This is definitely not ready for prime-time use. Don't complain to me if
+it breaks.</p>
 
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
@@ -54,7 +58,7 @@
 <a href="http://www.bluez.org/">BlueZ</a>, the official Linux Bluetooth protocol stack</li>
 <li>
 <a href="http://www.xmms.org/">XMMS</a>, a command-line audio player for Linux</li>
-</ul><p>Install it from RubyGems:</p>
+</ul><p>Install the gem from RubyGems:</p>
 
 <div class="highlight highlight-bash"><pre><span class="nv">$ </span>gem install walkon
 </pre></div>
@@ -67,17 +71,16 @@ order to actually hear tracks...</p>
 
 <p>Place an MP3 in <code>/music</code> that corresponds with your device's ESSID.
 So, if your device's name is "iPhone5", you would upload a track like
-so:</p>
+so (from your own machine):</p>
 
 <div class="highlight highlight-bash"><pre><span class="nv">$ </span>scp your-track.mp3 walkon:/music/iPhone5.mp3
 </pre></div>
 
-<p>Then, start the daemon process:</p>
+<p>Then, run the daemon process to sniff for that ESS ID and play the track
+when it first becomes available (on the host machine):</p>
 
-<div class="highlight highlight-bash"><pre><span class="nv">$ </span>walkon setup
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>walkon
 </pre></div>
-
-<p>If your phone has Bluetooth enabled, you should now hear your own entrance music given that you are in proximity to the box.</p>
 
 <p>To find out more about how it works, read the <a href="http://rdoc.info/github/tubbo/walkon">Documentation</a>.</p>
 
