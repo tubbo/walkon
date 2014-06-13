@@ -1,14 +1,11 @@
-require 'walkon/device'
-
 # Finds and plays the entrance music for a given device.
 
 module Walkon
   class EntranceMusic
-    attr_reader :device, :filename
+    attr_reader :filename
 
-    def initialize from_device
-      @device = from_device
-      @filename = "#{prefix}/#{@device.mac_address}.mp3"
+    def initialize with_file_name
+      @filename = "#{prefix}/#{with_file_name}.mp3"
     end
 
     def exists?
@@ -18,11 +15,13 @@ module Walkon
     alias present? exists?
 
     def play
-      return false unless exists?
-      `xmms #{filename}`
+      present? and play_track
     end
 
-    private
+    def play_track
+      `xmms #{filename}` == ''
+    end
+
     def prefix
       if Walkon.env == 'test'
         File.expand_path "../../../spec/fixtures/music", __FILE__

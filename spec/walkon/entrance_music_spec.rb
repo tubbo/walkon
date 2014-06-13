@@ -3,24 +3,43 @@ require 'walkon/entrance_music'
 
 module Walkon
   describe EntranceMusic do
-    let(:mac_address) { "00:A1:5D:AB:B2:E9" }
-    let(:device) do
-      dev = double :device
-      dev.stub(:mac_address) { mac_address }
-      dev
-    end
-    subject { EntranceMusic.new device }
+    subject { EntranceMusic.new 'iPhone5' }
 
-    before do
-      subject.stub(:play) { "" }
+    context "when the mp3 file is found" do
+      before do
+        allow(File).to receive(:exists?).with(subject.filename).and_return true
+      end
+
+      it "is considered to be present" do
+        expect(subject).to be_present
+      end
+
+      it "is considered to be existant" do
+        expect(subject).to be_exists
+      end
+
+      it "runs an xmms command to play the track" do
+        allow(subject).to receive(:play_track).and_return true
+        expect(subject.play).to eq(true)
+      end
     end
 
-    it "finds an mp3 file to play" do
-      expect(subject).to be_present
-    end
+    context "when the mp3 file is not found" do
+      before do
+        allow(File).to receive(:exists?).with(subject.filename).and_return false
+      end
 
-    it "plays the mp3 file if found" do
-      expect(subject.play).to be_true
+      it "is considered not present" do
+        expect(subject).to_not be_present
+      end
+
+      it "is considered non-existant" do
+        expect(subject).to_not be_exists
+      end
+
+      it "will not run the xmms command to play track" do
+        expect(subject.play).to eq(false)
+      end
     end
   end
 end

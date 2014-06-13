@@ -13,17 +13,23 @@ module Walkon
     end
 
     def scan
-      @results = scan_results.reduce([]) do |collection, line|
-        line.scan FOR_MAC_ADDRESS do |mac_address|
-          collection << mac_address.first
+      @results += scan_results_ess_ids
+      @results = @results.uniq
+      @results
+    end
+
+    private
+    def scan_results_ess_ids
+      each_line = /\A(..:..:..:..:..:..)\s(.*)\Z/
+      scan_results.reduce([]) do |collection, line|
+        line.scan each_line do |(mac_addr,ess_id)|
+          collection << ess_id.strip
         end
 
         collection
       end
     end
 
-    private
-    FOR_MAC_ADDRESS = /(..:..:..:..:..:..)/
     def scan_results
       `hcitool scan`.split "\n"
     end

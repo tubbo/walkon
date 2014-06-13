@@ -25,22 +25,17 @@ module Walkon
       loop { check_for_devices }
     end
 
+    private
     def check_for_devices
-      scanned_devices.each do |mac_address|
-        unless self.devices.include? mac_address
-          device = Device.new mac_address
-          play_entrance_music_for device
-          self.devices << Device.new(mac_address)
-        end
-      end
+      @devices = scanned_device_ess_ids.reject { |ess_id|
+        devices.include? ess_id
+      }.map { |ess_id|
+        Device.play! ess_id
+      }
     end
 
-    def scanned_devices
+    def scanned_device_ess_ids
       HciTool.scan
-    end
-
-    def play_entrance_music_for device
-      device.entrance_music.play if device.has_entrance_music?
     end
   end
 end
