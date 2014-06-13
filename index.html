@@ -54,14 +54,9 @@
 <a href="http://www.bluez.org/">BlueZ</a>, the official Linux Bluetooth protocol stack</li>
 <li>
 <a href="http://www.xmms.org/">XMMS</a>, a command-line audio player for Linux</li>
-</ul><p>Install it yourself:</p>
+</ul><p>Install it from RubyGems:</p>
 
 <div class="highlight highlight-bash"><pre><span class="nv">$ </span>gem install walkon
-</pre></div>
-
-<p>Then, run:</p>
-
-<div class="highlight highlight-bash"><pre><span class="nv">$ </span>walkon setup
 </pre></div>
 
 <p>You must also connect speakers to your machine's soundcard output in
@@ -76,6 +71,13 @@ so:</p>
 
 <div class="highlight highlight-bash"><pre><span class="nv">$ </span>scp your-track.mp3 walkon:/music/iPhone5.mp3
 </pre></div>
+
+<p>Then, start the daemon process:</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>walkon setup
+</pre></div>
+
+<p>If your phone has Bluetooth enabled, you should now hear your own entrance music given that you are in proximity to the box.</p>
 
 <p>To find out more about how it works, read the <a href="http://rdoc.info/github/tubbo/walkon">Documentation</a>.</p>
 
