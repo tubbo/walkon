@@ -31,14 +31,14 @@ order to actually hear tracks...
 
 Place an MP3 in `/music` that corresponds with your device's ESSID.
 So, if your device's name is "iPhone5", you would upload a track like
-so:
+so (from your own machine):
 
 ```bash
 $ scp your-track.mp3 walkon:/music/iPhone5.mp3
 ```
 
 Then, run the daemon process to sniff for that ESS ID and play the track
-when it first becomes available:
+when it first becomes available (on the host machine):
 
 ```bash
 $ walkon
